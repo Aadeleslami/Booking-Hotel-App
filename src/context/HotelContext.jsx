@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { is } from "date-fns/locale";
 
 const HotelContext = createContext();
 const BASE_URL = "http://localhost:5000/hotels";

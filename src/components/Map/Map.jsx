@@ -34,15 +34,15 @@ function Map({markerLocation}) {
 
   return (
     <div className="mapContainer">
+        <button onClick={getPosition} className="getLocation">
+          {isLoadingGeoLocation ? "Loading ..." : "Use Your Location"}
+        </button>
       <MapContainer
         className="map"
         center={mapCenter}
         zoom={13}
         scrollWheelZoom={true}
       >
-        <button onClick={getPosition} className="getLocation">
-          {isLoadingGeoLocation ? "Loading ..." : "Use Your Location"}
-        </button>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
@@ -74,7 +74,7 @@ function DetectClick() {
   const navigate = useNavigate();
   useMapEvent({
     click: (e) =>
-      navigate(`/bookmark?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
+      navigate(`/bookmark/add?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
   });
   return null;
 }

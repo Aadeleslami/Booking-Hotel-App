@@ -5,14 +5,14 @@ import LocationList from "./components/LocationList/LocationList";
 import { Route, Routes } from "react-router-dom";
 import AppLayout from "./components/AppLayout/AppLayout";
 import Hotels from "./components/Hotels/Hotels";
-import HotelsProvider from "./context/HotelContext";
 import SingleHotel from "./components/SingleHotel/SingleHotel";
-import Bookmark from "./components/Bookmark/Bookmark";
+import BookmarkLayout from "./components/BookmarkLayout/BookmarkLayout";
+import Provider from "./Provider";
 
 function App() {
   return (
-    <HotelsProvider>
-      <Toaster />
+   <Provider>
+        <Toaster />
       <Header />
       <Routes>
         <Route path="/" element={<LocationList />} />
@@ -20,9 +20,12 @@ function App() {
           <Route index element={<Hotels />} />
           <Route path=":id" element={<SingleHotel />} />
         </Route>
-        <Route path="/bookmark" element={<Bookmark/>}/>
+        <Route path="/bookmark" element={<BookmarkLayout/>}>
+        <Route index element={<div>bookmarkList</div>} />
+        <Route path="add" element={<div>add bookmark</div>} />
+        </Route>
       </Routes>
-    </HotelsProvider>
+   </Provider>
   );
 }
 

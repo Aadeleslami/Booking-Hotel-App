@@ -1,16 +1,17 @@
+import { Outlet } from "react-router-dom"
 import Map from "../Map/Map"
 
-function Bookmark() {
+function BookmarkLayout() {
 
   return (
     <div className="appLayout">
       <div className="sidebar">
-        {/* <Outlet /> */}
-        <div>bookmark location</div>
+        <Outlet />
+       
       </div>
       <Map markerLocation={[]} />
     </div>
   )
 }
 
-export default Bookmark
+export default BookmarkLayout
