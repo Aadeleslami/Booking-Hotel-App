@@ -9,8 +9,8 @@ const HotelContext = createContext();
 const BASE_URL = "http://localhost:5000/hotels";
 
 function HotelsProvider({ children }) {
-  const [isCurrLoading,setIsCurrLoading] = useState(false);
-  const[currentHotel,setCurrentHotel] = useState(null);
+  const [isCurrLoading, setIsCurrLoading] = useState(false);
+  const [currentHotel, setCurrentHotel] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const destination = searchParams.get("destination");
   const room = JSON.parse(searchParams.get("options"))?.room;
@@ -19,20 +19,21 @@ function HotelsProvider({ children }) {
     BASE_URL,
     `q=${destination || ""}&accommodates_gte=${room || 1}`
   );
-  async function getSingleHotel(id){
+  async function getSingleHotel(id) {
     setIsCurrLoading(true);
     try {
-      const {data} = await axios.get(`${BASE_URL}/${id}`);
+      const { data } = await axios.get(`${BASE_URL}/${id}`);
       setCurrentHotel(data);
       setIsCurrLoading(false);
     } catch (error) {
       toast.error(error?.message);
       setIsCurrLoading(false);
-      
     }
   }
   return (
-    <HotelContext.Provider value={{ isLoading, hotels,isCurrLoading,currentHotel,getSingleHotel }}>
+    <HotelContext.Provider
+      value={{ isLoading, hotels, isCurrLoading, currentHotel, getSingleHotel }}
+    >
       {children}
     </HotelContext.Provider>
   );
