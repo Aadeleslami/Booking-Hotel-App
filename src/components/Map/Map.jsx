@@ -7,7 +7,6 @@ import {
   useMap,
   useMapEvent,
 } from "react-leaflet";
-import Loader from "../Loader/Loader";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useGeoLocation from "../../hooks/useGeoLoacation";
 
