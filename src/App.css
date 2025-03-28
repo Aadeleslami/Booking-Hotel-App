@@ -285,7 +285,7 @@
 }
 
 .bookmarkList .bookmarkItem.current-bookmark {
-  border: 2px solid var(--primary-600);
+  background-color: #e3ebff;
   background-color: var(--text-100);
 }
 
