@@ -18,9 +18,10 @@ function SingleBookmark() {
   return (
     <div>
       <button onClick={handleBack} className="btn btn--back">
-        {" "}
-        Back
+        
+       &larr; Back
       </button>
+      <h2>{currentBookmark.cityName}</h2>
       <div className="bookmarkItem">
         <ReactCountryFlag svg countryCode={currentBookmark.countryCode} />
         &nbsp;<strong>{currentBookmark.cityName}</strong>&nbsp;

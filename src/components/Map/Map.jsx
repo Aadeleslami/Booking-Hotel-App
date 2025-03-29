@@ -7,15 +7,14 @@ import {
   useMap,
   useMapEvent,
 } from "react-leaflet";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import useGeoLocation from "../../hooks/useGeoLoacation";
+import useUrlLocation from "../../hooks/useUrlLocation";
 
-function Map({markerLocation}) {
+function Map({ markerLocation }) {
   const [mapCenter, setMapCenter] = useState([51.505, -0.09]);
- 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
+
+  const [lat, lng] = useUrlLocation();
   const {
     isLoading: isLoadingGeoLocation,
     position: geoLocationPosition,
@@ -33,9 +32,9 @@ function Map({markerLocation}) {
 
   return (
     <div className="mapContainer">
-        <button onClick={getPosition} className="getLocation">
-          {isLoadingGeoLocation ? "Loading ..." : "Use Your Location"}
-        </button>
+      <button onClick={getPosition} className="getLocation">
+        {isLoadingGeoLocation ? "Loading ..." : "Use Your Location"}
+      </button>
       <MapContainer
         className="map"
         center={mapCenter}
