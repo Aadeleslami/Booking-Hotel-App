@@ -4,17 +4,18 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "../Loader/Loader";
-import { set } from "date-fns";
 import ReactCountryFlag from "react-country-flag";
+import { useBookmark } from "../../context/BookmarkListContext";
 const BASE_GEOCODING_URL =
   "https://us1.api-bdc.net/data/reverse-geocode-client";
 function AddNewBookmark() {
   const [lat, lng] = useUrlLocation();
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
-  const [codeCountry, setCodeCountry] = useState("");
+  const [countryCode, setCountryCode] = useState("");
   const [isLoadingGeoCoding, setIsLoadingGeoCoding] = useState(false);
   const [errorGeoCoding, setErrorGeoCoding] = useState(null);
+  const{createBookmark}=useBookmark()
   const navigate = useNavigate();
   useEffect(() => {
     if (!lat || !lng) return;
@@ -32,7 +33,7 @@ function AddNewBookmark() {
 
         setCityName(data.city || data.locality || "Unknown City");
         setCountry(data?.countryName);
-        setCodeCountry(data.countryCode);
+        setCountryCode(data.countryCode);
       } catch (error) {
         setErrorGeoCoding(error.message);
         toast.error(error.message);
@@ -46,12 +47,26 @@ function AddNewBookmark() {
     e.preventDefault();
     navigate(-1);
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!cityName || !country) return toast.error("Please fill all fields");
+    const newBookmark = {
+      cityName,
+      country,
+      countryCode,
+      latitude: lat,
+      longitude: lng,
+      host_location: cityName + "" + country,
+    };
+    await createBookmark(newBookmark);
+    navigate("/bookmark");
+  };
   if (isLoadingGeoCoding) return <Loader />;
-  if (errorGeoCoding) return <p>{errorGeoCoding}</p>;
+  if (errorGeoCoding) return <strong>{errorGeoCoding}</strong>;
   return (
     <div>
       <h2>Bookmark New Location</h2>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="formControl">
           <label htmlFor="cityName">City Name</label>
           <input
@@ -71,7 +86,7 @@ function AddNewBookmark() {
             id="country"
             name="country"
           />
-          <ReactCountryFlag className="flag" svg countryCode={codeCountry} />
+          <ReactCountryFlag className="flag" svg countryCode={countryCode} />
         </div>
         <div className="buttons">
           <button className="btn btn--primary">Add</button>
