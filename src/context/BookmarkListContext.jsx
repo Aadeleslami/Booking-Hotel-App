@@ -17,8 +17,7 @@ function BookmarkListProvider({ children }) {
         setBookmarks(data);
       } catch (error) {
         toast.error(error?.message);
-      }
-      finally{
+      } finally {
         setIsLoading(false);
       }
     }
@@ -32,9 +31,7 @@ function BookmarkListProvider({ children }) {
       setCurrentBookmark(data);
     } catch (error) {
       toast.error(error?.message);
-     
-    }
-    finally{
+    } finally {
       setIsLoading(false);
     }
   }
@@ -47,11 +44,22 @@ function BookmarkListProvider({ children }) {
       setBookmarks((prev) => [...prev, data]);
     } catch (error) {
       toast.error(error?.message);
-    }
-    finally{
+    } finally {
       setIsLoading(false);
       toast.success("Bookmark added successfully");
-    }     
+    }
+  }
+  async function deleteBookmark(id) {
+    setIsLoading(true);
+    try {
+     await axios.delete(`${BASE_URL}/bookmarks/${id}`);
+      setBookmarks((prev) => prev.filter(item=> item.id !== id));
+    } catch (error) {
+      toast.error(error?.message);
+    } finally {
+      setIsLoading(false);
+      toast.success("Bookmark deleted");
+    }
   }
   return (
     <BookmarkContext.Provider
@@ -61,6 +69,7 @@ function BookmarkListProvider({ children }) {
         currentBookmark,
         getBookmark,
         createBookmark,
+        deleteBookmark,
       }}
     >
       {children}
