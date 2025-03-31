@@ -8,11 +8,9 @@ function ProtectedRouter({children}) {
      useEffect(()=>{
         if(!isAuthentication) navigate("/login")
      },[isAuthentication,navigate])
-  return (
-    <div>
-        {isAuthentication ? children : null}
-    </div>
-  )
+  return  isAuthentication ? children : null
+  
+  
 }
 
 export default ProtectedRouter
