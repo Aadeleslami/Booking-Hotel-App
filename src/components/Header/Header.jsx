@@ -197,7 +197,7 @@ navigate("/")
         <div>
           <span>{user.name}</span>
           
-          <span onClick={handleLogout}>    logout<HiLogout /> </span>
+          <button onClick={handleLogout}>    logout<HiLogout /> </button>
         </div>
       ) : (
         <NavLink to="/login">login</NavLink>

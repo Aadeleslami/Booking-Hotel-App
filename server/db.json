@@ -1325,13 +1325,13 @@
   ],
   "bookmarks": [
     {
-      "cityName": "Cerfontaine",
-      "country": "Belgium",
-      "countryCode": "BE",
-      "latitude": "50.20222053951274",
-      "longitude": "4.446849914443015",
-      "host_location": "CerfontaineBelgium",
-      "id": 2
+      "cityName": "London",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "countryCode": "GB",
+      "latitude": "51.51780782511161",
+      "longitude": "-0.1447105407714844",
+      "host_location": "LondonUnited Kingdom of Great Britain and Northern Ireland (the)",
+      "id": 3
     }
   ]
 }
