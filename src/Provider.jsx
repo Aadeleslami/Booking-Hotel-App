@@ -1,14 +1,15 @@
-import HotelsProvider from './context/HotelContext'
-import BookmarkListProvider from './context/BookmarkListContext'
+import HotelsProvider from "./context/HotelContext";
+import BookmarkListProvider from "./context/BookmarkListContext";
+import AuthProvider from "./context/AuthProvider";
 
-function Provider({children}) {
+function Provider({ children }) {
   return (
-   <HotelsProvider>
-    <BookmarkListProvider>
-        {children}
-    </BookmarkListProvider>
-   </HotelsProvider>
-  )
+    <AuthProvider>
+      <HotelsProvider>
+        <BookmarkListProvider>{children}</BookmarkListProvider>
+      </HotelsProvider>
+    </AuthProvider>
+  );
 }
 
-export default Provider
+export default Provider;

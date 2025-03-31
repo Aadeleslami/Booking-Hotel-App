@@ -1332,15 +1332,6 @@
       "longitude": "4.446849914443015",
       "host_location": "CerfontaineBelgium",
       "id": 2
-    },
-    {
-      "cityName": "Creteil",
-      "country": "France",
-      "countryCode": "FR",
-      "latitude": "48.783704255157105",
-      "longitude": "2.47467553299972",
-      "host_location": "CreteilFrance",
-      "id": 3
     }
   ]
 }

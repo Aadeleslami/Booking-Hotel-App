@@ -1,15 +1,30 @@
 import { MdLocationOn } from "react-icons/md";
-import { HiCalendar, HiMinus, HiPlus, HiSearch } from "react-icons/hi";
+import {
+  HiCalendar,
+  HiLogout,
+  HiMinus,
+  HiPlus,
+  HiSearch,
+} from "react-icons/hi";
 import { useRef, useState } from "react";
 import useOutSideClick from "../../hooks/useOutSideClick";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
-import { createSearchParams, NavLink, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  createSearchParams,
+  NavLink,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+import { useAuth } from "../../context/AuthProvider";
 function Header() {
-  const[searchParams,setSearchParams]=useSearchParams()
-  const [destination, setDestination] = useState(searchParams.get("destination") || "");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [destination, setDestination] = useState(
+    searchParams.get("destination") || ""
+  );
   const [openOption, setOpenOption] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
@@ -25,9 +40,9 @@ function Header() {
   ]);
   const [openDate, setOpenDate] = useState(false);
   const navigation = useNavigate();
-  const location = useLocation()
-  const isHomePage = location.pathname === "/"
-  
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   const handleOptions = (name, operation) => {
     setOptions((prev) => {
       return {
@@ -36,20 +51,26 @@ function Header() {
       };
     });
   };
-  const handleSearch = ()=>{
- const encoded= createSearchParams({
-    date:JSON.stringify(date),
-    options:JSON.stringify(options),
-    destination
-  })
-navigation({
-  pathname:"/hotels",
-  search:encoded.toString()
-})
-  }
+  const handleSearch = () => {
+    const encoded = createSearchParams({
+      date: JSON.stringify(date),
+      options: JSON.stringify(options),
+      destination,
+    });
+    navigation({
+      pathname: "/hotels",
+      search: encoded.toString(),
+    });
+  };
   return (
     <div className="header">
-     <div>{isHomePage?  <NavLink  to="/bookmark">{"Bookmark"}</NavLink> : <NavLink to="/">{"home"}</NavLink>}</div>
+      <div>
+        {isHomePage ? (
+          <NavLink to="/bookmark">{"Bookmark"}</NavLink>
+        ) : (
+          <NavLink to="/">{"home"}</NavLink>
+        )}
+      </div>
       <div className="headerSearch">
         <div className="headerSearchItem">
           <MdLocationOn className="headerIcon locationIcon" />
@@ -67,7 +88,10 @@ navigation({
         <div className="headerSearchItem">
           <HiCalendar className="headerIcon dateIcon" />
           <div onClick={() => setOpenDate(!openDate)} className="dateDropDown">
-           {`${format(date[0].startDate,"MM/dd/yyyy")} to ${format(date[0].endDate,"MM/dd/yyyy")}`}
+            {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+              date[0].endDate,
+              "MM/dd/yyyy"
+            )}`}
           </div>
           {openDate && (
             <DateRange
@@ -100,6 +124,7 @@ navigation({
           </button>
         </div>
       </div>
+     <User/>
     </div>
   );
 }
@@ -154,6 +179,29 @@ function OptionItem({ options, type, minLimit, handleOptions }) {
           <HiPlus className="icon" />
         </button>
       </div>
+      
+    </div>
+  );
+}
+
+function User() {
+  const { isAuthentication, logout, user } = useAuth();
+  const navigate =useNavigate()
+  const handleLogout = ()=>{
+    logout()
+navigate("/")
+  }
+  return (
+    <div>
+      {isAuthentication ? (
+        <div>
+          <span>{user.name}</span>
+          
+          <span onClick={handleLogout}>    logout<HiLogout /> </span>
+        </div>
+      ) : (
+        <NavLink to="/login">login</NavLink>
+      )}
     </div>
   );
 }
