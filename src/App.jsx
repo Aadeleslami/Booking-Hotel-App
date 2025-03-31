@@ -14,10 +14,11 @@ import AddNewBookmark from "./components/AddNewBookmark/AddNewBookmark";
 import Login from "./components/Login/Login";
 import ProtectedRouter from "./components/ProtectedRouter/ProtectedRouter";
 
+
 function App() {
   return (
-    <Provider>
-      <Toaster />
+   <Provider>
+        <Toaster />
       <Header />
       <Routes>
         <Route path="/" element={<LocationList />} />
@@ -25,21 +26,16 @@ function App() {
           <Route index element={<Hotels />} />
           <Route path=":id" element={<SingleHotel />} />
         </Route>
-        <Route path="/bookmark" element={<BookmarkLayout />}>
-          <Route
-            index
-            element={
-              <ProtectedRouter>
-                <Bookmark />
-              </ProtectedRouter>
-            }
-          />
-          <Route path=":id" element={<SingleBookmark />} />
-          <Route path="add" element={<AddNewBookmark />} />
+        <Route path="/bookmark" element={<ProtectedRouter>
+          <BookmarkLayout/>
+        </ProtectedRouter>}>
+        <Route index element={<Bookmark/>} />
+        <Route path=":id" element={<SingleBookmark/>} />
+        <Route path="add" element={<AddNewBookmark/>} />
         </Route>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login/>} />
       </Routes>
-    </Provider>
+   </Provider>
   );
 }
 
