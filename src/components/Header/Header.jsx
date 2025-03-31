@@ -6,7 +6,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
-import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
+import { createSearchParams, NavLink, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 function Header() {
   const[searchParams,setSearchParams]=useSearchParams()
   const [destination, setDestination] = useState(searchParams.get("destination") || "");
@@ -25,6 +25,8 @@ function Header() {
   ]);
   const [openDate, setOpenDate] = useState(false);
   const navigation = useNavigate();
+  const location = useLocation()
+  const isHomePage = location.pathname === "/"
   
   const handleOptions = (name, operation) => {
     setOptions((prev) => {
@@ -47,6 +49,7 @@ navigation({
   }
   return (
     <div className="header">
+     <div>{isHomePage?  <NavLink  to="/bookmark">{"Bookmark"}</NavLink> : <NavLink to="/">{"home"}</NavLink>}</div>
       <div className="headerSearch">
         <div className="headerSearchItem">
           <MdLocationOn className="headerIcon locationIcon" />

@@ -77,7 +77,7 @@ function BookmarkListProvider({ children }) {
   }, []);
 
   async function getBookmark(id) {
-    if(Number(id)===currentBookmark?.id)return;
+    if (Number(id) === currentBookmark?.id) return;
     dispatch({ type: "loading" });
     try {
       const { data } = await axios.get(`${BASE_URL}/bookmarks/${id}`);
@@ -96,20 +96,22 @@ function BookmarkListProvider({ children }) {
       const { data } = await axios.post(`${BASE_URL}/bookmarks/`, newBookmark);
 
       dispatch({ type: "bookmark/created", payload: data });
+      toast.success("Bookmark added successfully");
     } catch (error) {
       toast.error(error?.message);
       dispatch({ type: "rejected", payload: error.message });
-    } 
+    }
   }
   async function deleteBookmark(id) {
     dispatch({ type: "loading" });
     try {
       await axios.delete(`${BASE_URL}/bookmarks/${id}`);
       dispatch({ type: "bookmark/deleted", payload: id });
+      toast.success("Bookmark deleted");
     } catch (error) {
       toast.error(error?.message);
       dispatch({ type: "rejected", payload: error.message });
-    } 
+    }
   }
   return (
     <BookmarkContext.Provider

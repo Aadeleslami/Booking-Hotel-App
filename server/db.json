@@ -1325,22 +1325,22 @@
   ],
   "bookmarks": [
     {
-      "cityName": "London",
-      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
-      "countryCode": "GB",
-      "latitude": "51.502101518686324",
-      "longitude": "-0.07312774658203126",
-      "host_location": "LondonUnited Kingdom of Great Britain and Northern Ireland (the)",
-      "id": 1
+      "cityName": "Cerfontaine",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "latitude": "50.20222053951274",
+      "longitude": "4.446849914443015",
+      "host_location": "CerfontaineBelgium",
+      "id": 2
     },
     {
-      "cityName": "London",
-      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
-      "countryCode": "GB",
-      "latitude": "51.530943311305656",
-      "longitude": "-0.08668899536132812",
-      "host_location": "LondonUnited Kingdom of Great Britain and Northern Ireland (the)",
-      "id": 2
+      "cityName": "Creteil",
+      "country": "France",
+      "countryCode": "FR",
+      "latitude": "48.783704255157105",
+      "longitude": "2.47467553299972",
+      "host_location": "CreteilFrance",
+      "id": 3
     }
   ]
 }
