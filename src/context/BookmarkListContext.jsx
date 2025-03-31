@@ -99,9 +99,7 @@ function BookmarkListProvider({ children }) {
     } catch (error) {
       toast.error(error?.message);
       dispatch({ type: "rejected", payload: error.message });
-    } finally {
-      toast.success("Bookmark added successfully");
-    }
+    } 
   }
   async function deleteBookmark(id) {
     dispatch({ type: "loading" });
@@ -111,9 +109,7 @@ function BookmarkListProvider({ children }) {
     } catch (error) {
       toast.error(error?.message);
       dispatch({ type: "rejected", payload: error.message });
-    } finally {
-      toast.success("Bookmark deleted");
-    }
+    } 
   }
   return (
     <BookmarkContext.Provider
